@@ -18,9 +18,9 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 	}
 	
 	@Override
-	public void a(float sideMot, float forMot, float f2) {
+	public void a(float strafe, float vertical, float forward) {
 		if (!CustomEntities.customEntities.contains(this)) {
-			super.e(sideMot, forMot);
+			super.a(strafe, vertical, forward);
 			return;
 		}
 		
@@ -28,7 +28,7 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 		if (!bP().isEmpty()) {
 			passenger = (EntityHuman) bP().get(0);
 		}
-		ride(sideMot, forMot, passenger, this);
+		ride(strafe, vertical, forward, passenger, this);
 	}
 	
 	@Override
@@ -37,8 +37,8 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 	}
 	
 	@Override
-	public void g_(float sideMot, float forMot) {
-		super.e(sideMot, forMot);
+	public void g_(float strafe, float vertical, float forward) {
+		super.a(strafe, vertical, forward);
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 		return false;
 	}
 	
-	static void ride(float sideMot, float forMot, EntityHuman passenger, EntityInsentient entity) {
+	static void ride(float strafe, float vertical, float forward, EntityHuman passenger, EntityInsentient entity) {
 		if (!(entity instanceof EntityBase)) {
 			throw new IllegalArgumentException("The entity field should implements EntityBase");
 		}
@@ -68,11 +68,11 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 			wEntity.setRenderYawOffset(entity.yaw);
 			wEntity.setRotationYawHead(entity.yaw);
 			
-			sideMot = wPassenger.getMoveStrafing() * 0.25f;
-			forMot = wPassenger.getMoveForward() * 0.5f;
+			strafe = wPassenger.getMoveStrafing() * 0.25f;
+			forward = wPassenger.getMoveForward() * 0.5f;
 			
-			if (forMot <= 0.0F) {
-				forMot *= 0.25F;
+			if (forward <= 0.0F) {
+				forward *= 0.25F;
 			}
 			
 			wEntity.setJumping(wPassenger.isJumping());
@@ -92,7 +92,7 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 			wEntity.setRotationYawHead(entity.yaw);
 			
 			wEntity.setMoveSpeed(0.35f * entityBase.getSpeed());
-			entityBase.g_(sideMot, forMot);
+			entityBase.g_(strafe, vertical, forward);
 			
 			
 			wEntity.setPrevLimbSwingAmount(wEntity.getLimbSwingAmount());
@@ -111,7 +111,7 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 			wEntity.setStepHeight(0.5f);
 			wEntity.setJumpMovementFactor(0.02f);
 			
-			entityBase.g_(sideMot, forMot);
+			entityBase.g_(strafe, vertical, forward);
 		}
 	}
 	
@@ -122,6 +122,6 @@ public class RideableSpider extends EntitySpider implements IMountCustomEntity, 
 	
 	@Override
 	public void removeAi() {
-		setNoAI(true);
+//		setNoAI(true);
 	}
 }

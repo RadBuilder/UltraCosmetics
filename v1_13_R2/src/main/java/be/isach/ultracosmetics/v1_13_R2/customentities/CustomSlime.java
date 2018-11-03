@@ -17,16 +17,16 @@ public class CustomSlime extends EntitySlime implements IMountCustomEntity, Enti
 	}
 	
 	@Override
-	public void a(float sideMot, float forMot, float f2) {
+	public void a(float strafe, float vertical, float forward) {
 		if (!CustomEntities.customEntities.contains(this)) {
-			super.e(sideMot, forMot);
+			super.a(strafe, vertical, forward);
 			return;
 		}
 		EntityHuman passenger = null;
 		if (!bP().isEmpty()) {
 			passenger = (EntityHuman) bP().get(0);
 		}
-		ride(sideMot, forMot, passenger, this);
+		ride(strafe, vertical, forward, passenger, this);
 	}
 	
 	@Override
@@ -36,8 +36,8 @@ public class CustomSlime extends EntitySlime implements IMountCustomEntity, Enti
 	
 	
 	@Override
-	public void g_(float sideMot, float forMot) {
-		super.e(sideMot, forMot);
+	public void g_(float strafe, float vertical, float forward) {
+		super.a(strafe, vertical, forward);
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class CustomSlime extends EntitySlime implements IMountCustomEntity, Enti
 		return getBukkitEntity();
 	}
 	
-	static void ride(float sideMot, float forMot, EntityHuman passenger, EntityInsentient entity) {
+	static void ride(float strafe, float vertical, float forward, EntityHuman passenger, EntityInsentient entity) {
 		if (!(entity instanceof EntityBase))
 			throw new IllegalArgumentException("The entity field should implements EntityBase");
 		
@@ -71,11 +71,11 @@ public class CustomSlime extends EntitySlime implements IMountCustomEntity, Enti
 			wEntity.setRenderYawOffset(entity.yaw);
 			wEntity.setRotationYawHead(entity.yaw);
 			
-			sideMot = wPassenger.getMoveStrafing() * 0.25f;
-			forMot = wPassenger.getMoveForward() * 0.5f;
+			strafe = wPassenger.getMoveStrafing() * 0.25f;
+			forward = wPassenger.getMoveForward() * 0.5f;
 			
-			if (forMot <= 0.0F)
-				forMot *= 0.25F;
+			if (forward <= 0.0F)
+				forward *= 0.25F;
 			
 			wEntity.setJumping(wPassenger.isJumping());
 			
@@ -94,7 +94,7 @@ public class CustomSlime extends EntitySlime implements IMountCustomEntity, Enti
 			wEntity.setRotationYawHead(entity.yaw);
 			
 			wEntity.setMoveSpeed(0.35f * entityBase.getSpeed());
-			entityBase.g_(sideMot, forMot);
+			entityBase.g_(strafe, vertical, forward);
 			
 			wEntity.setPrevLimbSwingAmount(wEntity.getLimbSwingAmount());
 			
@@ -112,12 +112,12 @@ public class CustomSlime extends EntitySlime implements IMountCustomEntity, Enti
 			wEntity.setStepHeight(0.5f);
 			wEntity.setJumpMovementFactor(0.02f);
 			
-			entityBase.g_(sideMot, forMot);
+			entityBase.g_(strafe, vertical, forward);
 		}
 	}
 	
 	@Override
 	public void removeAi() {
-		setNoAI(true);
+//		setNoAI(true);
 	}
 }
