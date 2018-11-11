@@ -112,6 +112,9 @@ public class GadgetPaintballGun extends Gadget implements Listener {
 			byte b = (byte) r.nextInt(15);
 			Location center = event.getEntity().getLocation().add(event.getEntity().getVelocity());
 			for (Block block : BlockUtils.getBlocksInRadius(center.getBlock().getLocation(), radius, false)) {
+				if (block.getType().toString().contains("WOOL")) {
+					continue;
+				}
 				BlockUtils.setToRestore(block, BlockUtils.getBlockByColor((String) SettingsManager.getConfig().get("Gadgets." + getType().getConfigName() + ".Block-Type"), b), b, 20 * 3);
 			}
 			if (SettingsManager.getConfig().getBoolean("Gadgets." + getType().getConfigName() + ".Particle.Enabled")) {
