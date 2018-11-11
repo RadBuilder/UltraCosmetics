@@ -161,9 +161,7 @@ public class EntityUtil implements IEntityUtil {
 		ec.pitch = player.getLocation().getPitch();
 		ec.yaw = player.getLocation().getYaw() - 180;
 		
-		Vector v = ec.getBukkitEntity().getLocation().getDirection();
-		Vector v1 = ec.getBukkitEntity().getLocation().getDirection().multiply(-1);
-		ec.move(EnumMoveType.SELF, v1.getX(), v.getY(), v1.getZ());
+		ec.move(EnumMoveType.SELF, vector.getX(), vector.getY(), vector.getZ());
 	}
 	
 	@Override
