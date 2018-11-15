@@ -5,6 +5,7 @@ import be.isach.ultracosmetics.command.subcommands.SubCommandClear;
 import be.isach.ultracosmetics.command.subcommands.SubCommandGadgets;
 import be.isach.ultracosmetics.command.subcommands.SubCommandGive;
 import be.isach.ultracosmetics.command.subcommands.SubCommandMenu;
+import be.isach.ultracosmetics.command.subcommands.SubCommandPurge;
 import be.isach.ultracosmetics.command.subcommands.SubCommandSelfView;
 import be.isach.ultracosmetics.command.subcommands.SubCommandToggle;
 import be.isach.ultracosmetics.command.subcommands.SubCommandTreasure;
@@ -127,6 +128,7 @@ public class CommandManager implements CommandExecutor {
 		registerCommand(new SubCommandGadgets(ultraCosmetics));
 		registerCommand(new SubCommandSelfView(ultraCosmetics));
 		registerCommand(new SubCommandMenu(ultraCosmetics));
+		registerCommand(new SubCommandPurge(ultraCosmetics));
 		registerCommand(new SubCommandGive(ultraCosmetics));
 		registerCommand(new SubCommandToggle(ultraCosmetics));
 		registerCommand(new SubCommandClear(ultraCosmetics));
